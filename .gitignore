@@ -1,0 +1,4 @@
+node_modules
+.DS_Store
+*.local
+take_mobile_screenshots.cjs
