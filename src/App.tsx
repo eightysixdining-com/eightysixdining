@@ -9,7 +9,7 @@ import { CulturalEditionSection } from '@/components/CulturalEditionSection'
 import { CreatorsVisionSection } from '@/components/CreatorsVisionSection'
 import { FooterOpenPeeps } from '@/components/FooterOpenPeeps'
 import { TermsModal } from '@/components/TermsModal'
-import { ArrowUp, Instagram, MessageCircle } from 'lucide-react'
+import { ArrowUp, Instagram, MessageCircle, Mail } from 'lucide-react'
 
 export default function App() {
   const [isTermsOpen, setIsTermsOpen] = useState(false)
@@ -27,7 +27,7 @@ export default function App() {
       } else if (path === '/story') {
         targetId = 'story'
       } else if (path === '/contact') {
-        targetId = 'reservation'
+        targetId = 'contact'
       }
 
       if (targetId) {
@@ -140,6 +140,12 @@ export default function App() {
                 reservations@eightysixdining.com
               </a>
               <a
+                href="mailto:contact@eightysixdining.com"
+                className="text-neutral-400 hover:text-white block text-[11px] transition-colors"
+              >
+                contact@eightysixdining.com
+              </a>
+              <a
                 href="https://instagram.com/eightysix_dining"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -156,7 +162,7 @@ export default function App() {
               </span>
               <button
                 onClick={() => setIsTermsOpen(true)}
-                className="text-neutral-300 hover:text-white block underline text-[11px] transition-colors text-left"
+                className="text-neutral-300 hover:text-white block underline text-[11px] transition-colors text-left cursor-pointer"
               >
                 Terms &amp; Conditions
               </button>
@@ -177,7 +183,7 @@ export default function App() {
           </div>
           <button
             onClick={scrollToTop}
-            className="flex items-center gap-1.5 hover:text-white transition-colors"
+            className="flex items-center gap-1.5 hover:text-white transition-colors cursor-pointer"
           >
             <span>Back to top</span>
             <ArrowUp className="w-3.5 h-3.5" />

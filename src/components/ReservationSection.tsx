@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { MessageCircle, Clock, Calendar, MapPin, Sparkles, ArrowUpRight, DollarSign, Users, FileText, Instagram, ShieldCheck, Zap } from 'lucide-react'
+import { MessageCircle, Clock, Calendar, MapPin, Sparkles, ArrowUpRight, DollarSign, Users, FileText, Instagram, ShieldCheck, Zap, Mail } from 'lucide-react'
 import { LocationMap } from '@/components/ui/expand-map'
 import { HeroOpenPeeps } from '@/components/HeroOpenPeeps'
 import { CrowdOpenPeeps } from '@/components/CrowdOpenPeeps'
@@ -21,6 +21,9 @@ export function ReservationSection() {
 
   return (
     <section id="reservation" className="relative w-full bg-black text-white pt-20 pb-20 overflow-x-hidden">
+      {/* Top Anchor for Home */}
+      <div id="hero" className="absolute top-0 left-0 w-full h-1 pointer-events-none" />
+
       {/* 1) Hero Section: 3 rows of fullbody Open Peeps on #ffffff background */}
       <HeroOpenPeeps />
 
@@ -137,7 +140,7 @@ export function ReservationSection() {
                 <span>WhatsApp Business: +65 8995 3081</span>
                 <button
                   onClick={() => setIsTermsOpen(true)}
-                  className="underline hover:text-white flex items-center gap-1 transition-colors"
+                  className="underline hover:text-white flex items-center gap-1 transition-colors cursor-pointer"
                 >
                   <FileText className="w-3 h-3" />
                   <span>Terms &amp; Policy</span>
@@ -146,18 +149,19 @@ export function ReservationSection() {
             </div>
           </motion.div>
 
-          {/* Location & Interactive Map Panel */}
+          {/* Location & Interactive Map Panel (Contact Target) */}
           <motion.div
+            id="contact"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="lg:col-span-5 rounded-3xl border border-white/15 bg-neutral-950/80 p-6 sm:p-8 backdrop-blur-xl flex flex-col justify-between gap-6"
+            className="lg:col-span-5 rounded-3xl border border-white/15 bg-neutral-950/80 p-6 sm:p-8 backdrop-blur-xl flex flex-col justify-between gap-6 scroll-mt-24"
           >
             <div>
               <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-4">
                 <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-neutral-400">
-                  Private Address · Secret Lab
+                  Private Address · Contact &amp; Lab
                 </span>
                 <MapPin className="w-4 h-4 text-white" />
               </div>
@@ -184,21 +188,45 @@ export function ReservationSection() {
               />
             </div>
 
-            {/* Contact Point Details */}
+            {/* Verified Email & Contact Links */}
             <div className="pt-4 border-t border-white/10 space-y-2 text-[11px] font-mono text-neutral-400">
               <div className="flex items-center justify-between">
-                <span>Guest Reservations:</span>
-                <a href="mailto:reservations@eightysixdining.com" className="text-white hover:underline">
+                <span className="flex items-center gap-1.5">
+                  <Mail className="w-3 h-3 text-neutral-400" />
+                  Reservations:
+                </span>
+                <a
+                  href="mailto:reservations@eightysixdining.com"
+                  className="text-white hover:underline font-medium"
+                >
                   reservations@eightysixdining.com
                 </a>
               </div>
               <div className="flex items-center justify-between">
-                <span>Direct Personal:</span>
-                <a href="mailto:ewan@eightysixdining.com" className="text-white hover:underline">
-                  ewan@eightysixdining.com
+                <span className="flex items-center gap-1.5">
+                  <Mail className="w-3 h-3 text-neutral-400" />
+                  General Contact:
+                </span>
+                <a
+                  href="mailto:contact@eightysixdining.com"
+                  className="text-white hover:underline font-medium"
+                >
+                  contact@eightysixdining.com
                 </a>
               </div>
               <div className="flex items-center justify-between">
+                <span className="flex items-center gap-1.5">
+                  <Mail className="w-3 h-3 text-neutral-400" />
+                  Founder / Ewan:
+                </span>
+                <a
+                  href="mailto:ewan@eightysixdining.com"
+                  className="text-white hover:underline font-medium"
+                >
+                  ewan@eightysixdining.com
+                </a>
+              </div>
+              <div className="flex items-center justify-between pt-1 border-t border-white/5">
                 <span>Instagram:</span>
                 <a
                   href="https://instagram.com/eightysix_dining"

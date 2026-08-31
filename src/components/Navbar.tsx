@@ -3,15 +3,15 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, MessageCircle } from 'lucide-react'
 
 const navLinks = [
-  { id: 'reservation', path: '/reservations', label: 'Reservation', num: '1' },
-  { id: 'local-menu', path: '/experience', label: 'The Local Menu', num: '2' },
-  { id: 'story', path: '/story', label: 'The Story', num: '3' },
-  { id: 'cultural-edition', path: '/experience#cultural', label: 'The Cultural Edition', num: '4' },
-  { id: 'creators-vision', path: '/story#vision', label: "The Creator's Vision", num: '5' },
+  { id: 'hero', path: '/', label: 'Home', num: '1' },
+  { id: 'local-menu', path: '/experience', label: 'Experience', num: '2' },
+  { id: 'reservation', path: '/reservations', label: 'Reservations', num: '3' },
+  { id: 'story', path: '/story', label: 'Story', num: '4' },
+  { id: 'contact', path: '/contact', label: 'Contact', num: '5' },
 ]
 
 export function Navbar() {
-  const [activeSection, setActiveSection] = useState('reservation')
+  const [activeSection, setActiveSection] = useState('hero')
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
 
@@ -41,6 +41,8 @@ export function Navbar() {
     const el = document.getElementById(id)
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' })
+    } else if (id === 'hero') {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
     }
     if (window.history.pushState) {
       window.history.pushState(null, '', path)
@@ -64,7 +66,7 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Left: Brand / Spelled out eightysix / dining */}
         <button
-          onClick={() => scrollTo('reservation', '/')}
+          onClick={() => scrollTo('hero', '/')}
           className="flex items-center gap-2.5 group text-left focus:outline-none cursor-pointer"
         >
           <img
