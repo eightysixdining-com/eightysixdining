@@ -55,7 +55,7 @@ const localCourses: CourseItem[] = [
     subtitle: 'SHOKUPAN BREAD · KAYA PANDAN BUTTER',
     image: '/local-menu/KAYA TOAST.png',
     story:
-      'Milk-bread-soft and warm, pandan running green and grassy-sweet, kaya butter salty-caramel on the finish. Every kopitiam breakfast features toast, kaya, and a soft-boiled egg. Due to a seven-course dessert menu, the toast alone conveys the nostalgic essence of the meal.',
+      'Milk-bread-soft and warm, pandan running green and grassy-sweet, kaya butter salty-caramel on the finish. Every kopitiam breakfast features toast, kaya, and a soft-boiled egg. Due to a five-course dessert menu, the toast alone conveys the nostalgic essence of the meal.',
     whyItWorks:
       'Milk protein softens gluten in bread dough, making "milk bread" fluffier than regular bread. Additionally, pandan shares the same smell molecule as jasmine rice and freshly toasted bread. The kaya butter\'s salt enhances sweetness by dulling bitter taste buds, while the toast evokes nostalgia.',
   },
