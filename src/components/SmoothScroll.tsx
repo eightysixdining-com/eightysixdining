@@ -14,6 +14,9 @@ export function SmoothScroll() {
       infinite: false,
     })
 
+    // Expose lenis globally for seamless programmatic scrolling
+    ;(window as any).lenis = lenis
+
     function raf(time: number) {
       lenis.raf(time)
       requestAnimationFrame(raf)
@@ -31,7 +34,7 @@ export function SmoothScroll() {
           e.preventDefault()
           lenis.scrollTo(targetElement as HTMLElement, {
             offset: -80,
-            duration: 1.5,
+            duration: 1.4,
           })
         }
       }
@@ -43,6 +46,7 @@ export function SmoothScroll() {
       cancelAnimationFrame(rafId)
       document.removeEventListener('click', handleAnchorClick)
       lenis.destroy()
+      delete (window as any).lenis
     }
   }, [])
 

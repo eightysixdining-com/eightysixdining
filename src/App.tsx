@@ -9,7 +9,8 @@ import { CulturalEditionSection } from '@/components/CulturalEditionSection'
 import { CreatorsVisionSection } from '@/components/CreatorsVisionSection'
 import { FooterOpenPeeps } from '@/components/FooterOpenPeeps'
 import { TermsModal } from '@/components/TermsModal'
-import { ArrowUp, Instagram, MessageCircle, Mail } from 'lucide-react'
+import { EmailLink } from '@/components/EmailLink'
+import { ArrowUp, Instagram, MessageCircle } from 'lucide-react'
 
 export default function App() {
   const [isTermsOpen, setIsTermsOpen] = useState(false)
@@ -32,9 +33,14 @@ export default function App() {
 
       if (targetId) {
         setTimeout(() => {
+          const lenis = (window as any).lenis
           const el = document.getElementById(targetId)
           if (el) {
-            el.scrollIntoView({ behavior: 'smooth' })
+            if (lenis) {
+              lenis.scrollTo(el, { offset: -80, duration: 1.2 })
+            } else {
+              el.scrollIntoView({ behavior: 'smooth' })
+            }
           }
         }, 300)
       }
@@ -44,7 +50,12 @@ export default function App() {
   }, [])
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    const lenis = (window as any).lenis
+    if (lenis) {
+      lenis.scrollTo(0, { duration: 1.2 })
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
     if (window.history.pushState) {
       window.history.pushState(null, '', '/')
     }
@@ -129,27 +140,21 @@ export default function App() {
                 href="https://wa.me/6589953081"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-neutral-300 hover:text-white block transition-colors"
+                className="text-neutral-300 hover:text-white block transition-colors font-medium"
               >
                 +65 8995 3081 (Bookings)
               </a>
-              <a
-                href="mailto:reservations@eightysixdining.com"
-                className="text-neutral-400 hover:text-white block text-[11px] transition-colors"
-              >
-                reservations@eightysixdining.com
-              </a>
-              <a
-                href="mailto:contact@eightysixdining.com"
-                className="text-neutral-400 hover:text-white block text-[11px] transition-colors"
-              >
-                contact@eightysixdining.com
-              </a>
+              <div className="pt-1">
+                <EmailLink email="reservations@eightysixdining.com" showActions={false} className="text-neutral-400 hover:text-white text-[11px]" />
+              </div>
+              <div>
+                <EmailLink email="contact@eightysixdining.com" showActions={false} className="text-neutral-400 hover:text-white text-[11px]" />
+              </div>
               <a
                 href="https://instagram.com/eightysix_dining"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-neutral-400 hover:text-white flex items-center gap-1 text-[11px] transition-colors"
+                className="text-neutral-400 hover:text-white flex items-center gap-1 text-[11px] transition-colors pt-1"
               >
                 <Instagram className="w-3 h-3" />
                 <span>@eightysix_dining</span>

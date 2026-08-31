@@ -6,6 +6,7 @@ import { HeroOpenPeeps } from '@/components/HeroOpenPeeps'
 import { CrowdOpenPeeps } from '@/components/CrowdOpenPeeps'
 import { TermsModal } from '@/components/TermsModal'
 import { FAQSection } from '@/components/FAQSection'
+import { EmailLink } from '@/components/EmailLink'
 
 export function ReservationSection() {
   const [isTermsOpen, setIsTermsOpen] = useState(false)
@@ -188,45 +189,33 @@ export function ReservationSection() {
               />
             </div>
 
-            {/* Verified Email & Contact Links */}
-            <div className="pt-4 border-t border-white/10 space-y-2 text-[11px] font-mono text-neutral-400">
-              <div className="flex items-center justify-between">
-                <span className="flex items-center gap-1.5">
-                  <Mail className="w-3 h-3 text-neutral-400" />
+            {/* Verified Email & Contact Links with 1-Click Actions */}
+            <div className="pt-4 border-t border-white/10 space-y-3 text-[11px] font-mono text-neutral-400">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                <span className="flex items-center gap-1.5 text-neutral-300">
+                  <Mail className="w-3 h-3 text-neutral-400 flex-shrink-0" />
                   Reservations:
                 </span>
-                <a
-                  href="mailto:reservations@eightysixdining.com"
-                  className="text-white hover:underline font-medium"
-                >
-                  reservations@eightysixdining.com
-                </a>
+                <EmailLink email="reservations@eightysixdining.com" subject="eightysix dining Reservation Inquiry" />
               </div>
-              <div className="flex items-center justify-between">
-                <span className="flex items-center gap-1.5">
-                  <Mail className="w-3 h-3 text-neutral-400" />
+
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                <span className="flex items-center gap-1.5 text-neutral-300">
+                  <Mail className="w-3 h-3 text-neutral-400 flex-shrink-0" />
                   General Contact:
                 </span>
-                <a
-                  href="mailto:contact@eightysixdining.com"
-                  className="text-white hover:underline font-medium"
-                >
-                  contact@eightysixdining.com
-                </a>
+                <EmailLink email="contact@eightysixdining.com" subject="eightysix dining General Inquiry" />
               </div>
-              <div className="flex items-center justify-between">
-                <span className="flex items-center gap-1.5">
-                  <Mail className="w-3 h-3 text-neutral-400" />
+
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                <span className="flex items-center gap-1.5 text-neutral-300">
+                  <Mail className="w-3 h-3 text-neutral-400 flex-shrink-0" />
                   Founder / Ewan:
                 </span>
-                <a
-                  href="mailto:ewan@eightysixdining.com"
-                  className="text-white hover:underline font-medium"
-                >
-                  ewan@eightysixdining.com
-                </a>
+                <EmailLink email="ewan@eightysixdining.com" subject="eightysix dining Direct Inquiry" />
               </div>
-              <div className="flex items-center justify-between pt-1 border-t border-white/5">
+
+              <div className="flex items-center justify-between pt-2 border-t border-white/5">
                 <span>Instagram:</span>
                 <a
                   href="https://instagram.com/eightysix_dining"

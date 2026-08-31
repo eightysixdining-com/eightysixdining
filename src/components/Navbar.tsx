@@ -38,12 +38,25 @@ export function Navbar() {
 
   const scrollTo = (id: string, path: string) => {
     setIsMobileMenuOpen(false)
-    const el = document.getElementById(id)
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' })
-    } else if (id === 'hero') {
-      window.scrollTo({ top: 0, behavior: 'smooth' })
+    const lenis = (window as any).lenis
+
+    if (id === 'hero') {
+      if (lenis) {
+        lenis.scrollTo(0, { duration: 1.2 })
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      }
+    } else {
+      const el = document.getElementById(id)
+      if (el) {
+        if (lenis) {
+          lenis.scrollTo(el, { offset: -80, duration: 1.2 })
+        } else {
+          el.scrollIntoView({ behavior: 'smooth' })
+        }
+      }
     }
+
     if (window.history.pushState) {
       window.history.pushState(null, '', path)
     }
