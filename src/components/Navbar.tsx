@@ -3,11 +3,11 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, MessageCircle } from 'lucide-react'
 
 const navLinks = [
-  { id: 'reservation', label: 'Reservation', num: '1' },
-  { id: 'local-menu', label: 'The Local Menu', num: '2' },
-  { id: 'story', label: 'The Story', num: '3' },
-  { id: 'cultural-edition', label: 'The Cultural Edition', num: '4' },
-  { id: 'creators-vision', label: "The Creator's Vision", num: '5' },
+  { id: 'reservation', path: '/reservations', label: 'Reservation', num: '1' },
+  { id: 'local-menu', path: '/experience', label: 'The Local Menu', num: '2' },
+  { id: 'story', path: '/story', label: 'The Story', num: '3' },
+  { id: 'cultural-edition', path: '/experience#cultural', label: 'The Cultural Edition', num: '4' },
+  { id: 'creators-vision', path: '/story#vision', label: "The Creator's Vision", num: '5' },
 ]
 
 export function Navbar() {
@@ -36,11 +36,14 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const scrollTo = (id: string) => {
+  const scrollTo = (id: string, path: string) => {
     setIsMobileMenuOpen(false)
     const el = document.getElementById(id)
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' })
+    }
+    if (window.history.pushState) {
+      window.history.pushState(null, '', path)
     }
   }
 
@@ -61,8 +64,8 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Left: Brand / Spelled out eightysix / dining */}
         <button
-          onClick={() => scrollTo('reservation')}
-          className="flex items-center gap-2.5 group text-left focus:outline-none"
+          onClick={() => scrollTo('reservation', '/')}
+          className="flex items-center gap-2.5 group text-left focus:outline-none cursor-pointer"
         >
           <img
             src="/assets/media_1788077084539.png"
@@ -81,8 +84,8 @@ export function Navbar() {
             return (
               <button
                 key={link.id}
-                onClick={() => scrollTo(link.id)}
-                className={`relative px-4 py-2 rounded-full font-mono text-xs tracking-wider transition-all duration-200 flex items-center gap-1 ${
+                onClick={() => scrollTo(link.id, link.path)}
+                className={`relative px-4 py-2 rounded-full font-mono text-xs tracking-wider transition-all duration-200 flex items-center gap-1 cursor-pointer ${
                   isActive
                     ? 'text-black font-semibold'
                     : 'text-neutral-400 hover:text-white hover:bg-white/5'
@@ -140,7 +143,7 @@ export function Navbar() {
             {navLinks.map((link) => (
               <button
                 key={link.id}
-                onClick={() => scrollTo(link.id)}
+                onClick={() => scrollTo(link.id, link.path)}
                 className={`w-full text-left p-3.5 rounded-2xl flex items-center justify-between transition-colors ${
                   activeSection === link.id
                     ? 'bg-white text-black font-bold'

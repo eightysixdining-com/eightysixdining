@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { SmoothScroll } from '@/components/SmoothScroll'
 import { Navbar } from '@/components/Navbar'
 import { ReservationSection } from '@/components/ReservationSection'
@@ -14,8 +14,40 @@ import { ArrowUp, Instagram, MessageCircle } from 'lucide-react'
 export default function App() {
   const [isTermsOpen, setIsTermsOpen] = useState(false)
 
+  // Route-based direct deep-linking on initial load
+  useEffect(() => {
+    const handleInitialRoute = () => {
+      const path = window.location.pathname.toLowerCase().replace(/\/$/, '')
+      let targetId = ''
+
+      if (path === '/experience') {
+        targetId = 'local-menu'
+      } else if (path === '/reservations' || path === '/reservation') {
+        targetId = 'reservation'
+      } else if (path === '/story') {
+        targetId = 'story'
+      } else if (path === '/contact') {
+        targetId = 'reservation'
+      }
+
+      if (targetId) {
+        setTimeout(() => {
+          const el = document.getElementById(targetId)
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth' })
+          }
+        }, 300)
+      }
+    }
+
+    handleInitialRoute()
+  }, [])
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
+    if (window.history.pushState) {
+      window.history.pushState(null, '', '/')
+    }
   }
 
   const whatsappBusinessUrl =
