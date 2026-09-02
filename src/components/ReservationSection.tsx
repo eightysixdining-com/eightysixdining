@@ -101,7 +101,7 @@ export function ReservationSection() {
                   <Clock className="w-4 h-4 text-white flex-shrink-0 mt-0.5" />
                   <div>
                     <strong className="text-white block font-medium">Operating Hours</strong>
-                    <span>4:00 PM – 7:00 PM<br />7:30 PM – 9:30 PM</span>
+                    <span>4:00 PM – 6:30 PM<br />7:30 PM – 9:30 PM</span>
                   </div>
                 </div>
 

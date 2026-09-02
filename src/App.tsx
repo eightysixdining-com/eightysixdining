@@ -128,7 +128,7 @@ export default function App() {
                 Sessions
               </span>
               <p className="text-neutral-300">Mon – Sat</p>
-              <p className="text-neutral-400 text-[11px]">4:00 PM – 7:00 PM</p>
+              <p className="text-neutral-400 text-[11px]">4:00 PM – 6:30 PM</p>
               <p className="text-neutral-400 text-[11px]">7:30 PM – 9:30 PM</p>
             </div>
 
