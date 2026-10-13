@@ -11,7 +11,7 @@ import { ValuesSection } from '@/components/ValuesSection'
 import { FooterOpenPeeps } from '@/components/FooterOpenPeeps'
 import { TermsModal } from '@/components/TermsModal'
 import { EmailLink } from '@/components/EmailLink'
-import { ArrowUp, Instagram, MessageCircle } from 'lucide-react'
+import { ArrowUp, Instagram } from 'lucide-react'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -83,15 +83,6 @@ export default function App() {
     }
     if (window.history.pushState) {
       window.history.pushState(null, '', '/')
-    }
-  }
-
-  const whatsappBusinessUrl =
-    'https://wa.me/6589953081?text=Hi%20Ewan!%20I%20would%20like%20to%20reserve%20a%20seat%20for%20the%20eightysix%20dining%20session%20(S%2498%2Fpax).'
-
-  const handleStickyBookClick = () => {
-    if (typeof (window as any).trackWhatsAppInquiry === 'function') {
-      (window as any).trackWhatsAppInquiry('sticky_mobile_bar')
     }
   }
 
@@ -221,20 +212,6 @@ export default function App() {
           </button>
         </div>
       </footer>
-
-      {/* Sticky Mobile Booking Bar (≤ 768px Viewport) */}
-      <div className="sm:hidden fixed bottom-4 left-4 right-4 z-40">
-        <a
-          href={whatsappBusinessUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={handleStickyBookClick}
-          className="w-full py-3.5 px-6 rounded-full bg-white text-black font-poppins font-bold text-xs tracking-wider uppercase flex items-center justify-center gap-2.5 shadow-[0_8px_32px_rgba(0,0,0,0.8)] border border-white/20 active:scale-95 transition-transform"
-        >
-          <MessageCircle className="w-4 h-4 fill-current" />
-          <span>Reserve &middot; S$98 / pax</span>
-        </a>
-      </div>
 
       {/* Global Terms Modal */}
       <TermsModal isOpen={isTermsOpen} onClose={() => setIsTermsOpen(false)} />
