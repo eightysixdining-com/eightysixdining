@@ -143,7 +143,7 @@ export default function App() {
               </span>
             </div>
             <p className="text-neutral-400 max-w-sm text-[11px] leading-relaxed">
-              A private in-home five-course plated dessert omakase run solo by pastry artisan Shazwan (Ewan) Sapari.
+              A private in-home seven-course plated dessert omakase run solo by pastry artisan Shazwan (Ewan) Sapari.
               Yishun St 11 Block 162, Singapore 760162.
             </p>
           </div>
