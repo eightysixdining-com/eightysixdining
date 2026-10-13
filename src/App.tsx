@@ -1,19 +1,23 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { SmoothScroll } from '@/components/SmoothScroll'
 import { Navbar } from '@/components/Navbar'
-import { ReservationSection } from '@/components/ReservationSection'
-import { FloatingGallery } from '@/components/FloatingGallery'
-import { LocalMenuSection } from '@/components/LocalMenuSection'
-import { StorySection } from '@/components/StorySection'
-import { CulturalEditionSection } from '@/components/CulturalEditionSection'
-import { CreatorsVisionSection } from '@/components/CreatorsVisionSection'
+import { HeroSection } from '@/components/HeroSection'
+import { ManifestoSection } from '@/components/ManifestoSection'
+import { SliderSection } from '@/components/SliderSection'
+import { SpotlightSection } from '@/components/SpotlightSection'
+import { ValuesSection } from '@/components/ValuesSection'
 import { FooterOpenPeeps } from '@/components/FooterOpenPeeps'
 import { TermsModal } from '@/components/TermsModal'
 import { EmailLink } from '@/components/EmailLink'
 import { ArrowUp, Instagram, MessageCircle } from 'lucide-react'
 
+gsap.registerPlugin(ScrollTrigger)
+
 export default function App() {
   const [isTermsOpen, setIsTermsOpen] = useState(false)
+  const footerRef = useRef<HTMLElement>(null)
 
   // Route-based direct deep-linking on initial load
   useEffect(() => {
@@ -49,6 +53,27 @@ export default function App() {
     handleInitialRoute()
   }, [])
 
+  // Mechanic #7: footer handoff — short trigger that fades the footer in as
+  // the values section scrolls out.
+  useLayoutEffect(() => {
+    const footer = footerRef.current
+    if (!footer) return
+
+    gsap.set(footer, { opacity: 0 })
+
+    const trigger = ScrollTrigger.create({
+      trigger: '#values',
+      start: 'bottom bottom',
+      end: 'bottom top',
+      scrub: 0.3,
+      onUpdate: (self) => {
+        gsap.set(footer, { opacity: self.progress })
+      },
+    })
+
+    return () => trigger.kill()
+  }, [])
+
   const scrollToTop = () => {
     const lenis = (window as any).lenis
     if (lenis) {
@@ -62,7 +87,7 @@ export default function App() {
   }
 
   const whatsappBusinessUrl =
-    'https://wa.me/6589953081?text=Hi%20Ewan!%20I%20would%20like%20to%20reserve%20a%20seat%20for%20The%20Suka-Suka%20Session%20($138/guest).'
+    'https://wa.me/6589953081?text=Hi%20Ewan!%20I%20would%20like%20to%20reserve%20a%20seat%20for%20the%20eightysix%20dining%20session%20(S%2498%2Fpax).'
 
   const handleStickyBookClick = () => {
     if (typeof (window as any).trackWhatsAppInquiry === 'function') {
@@ -80,27 +105,28 @@ export default function App() {
 
       {/* Main Content Sections */}
       <main className="w-full">
-        {/* Section 1: Main Page / Hero / Reservation (includes 3 rows fullbody open peeps & 5 rows halfbody open peeps) */}
-        <ReservationSection />
+        {/* Section 1: Hero — pinned clip-path reveal (GSAP ScrollTrigger mechanic #1) */}
+        <HeroSection />
 
-        {/* Section: The Gallery (5 smooth parallax rows with 40 unique dessert pictures) */}
-        <FloatingGallery />
+        {/* Section 2: Manifesto — pinned word-reveal slides (mechanic #2) */}
+        <ManifestoSection />
 
-        {/* Section 2: The Local Menu (Slides 1 to 9 with scroll color reveal) */}
-        <LocalMenuSection />
+        {/* Section 3: The Local Menu slider — pinned horizontal deck + outro (mechanics #3/#4) */}
+        <SliderSection />
 
-        {/* Section 3: The Story (Origins, vessels, kitchen images, and About Ewan candid photo) */}
-        <StorySection />
+        {/* Section 4: Spotlight — one-shot onEnter reveal (mechanic #5) */}
+        <SpotlightSection />
 
-        {/* Section 4: The Cultural Edition (Slides 20 to 29 with graphic banners right before respective ethnics) */}
-        <CulturalEditionSection />
-
-        {/* Section 5: The Creator's Vision (Aligned and stretched portrait layout) */}
-        <CreatorsVisionSection />
+        {/* Section 5: The Facts — progress-driven highlight list (mechanic #6) */}
+        <ValuesSection />
       </main>
 
       {/* Global Minimalist Editorial Footer */}
-      <footer className="w-full border-t border-white/10 bg-neutral-950 pt-8 pb-28 sm:pb-16 px-6 font-mono text-xs overflow-hidden">
+      <footer
+        id="contact"
+        ref={footerRef}
+        className="w-full border-t border-white/10 bg-neutral-950 pt-8 pb-28 sm:pb-16 px-6 font-mono text-xs overflow-hidden"
+      >
         {/* 1 row of half body open peeps at the footer - end to end screen width */}
         <FooterOpenPeeps />
 
@@ -117,7 +143,7 @@ export default function App() {
               </span>
             </div>
             <p className="text-neutral-400 max-w-sm text-[11px] leading-relaxed">
-              A private in-home five-course plated dessert omakase run solo by pastry artisan Shazwan (Ewan) Sapari.
+              A private in-home seven-course plated dessert omakase run solo by pastry artisan Shazwan (Ewan) Sapari.
               Yishun St 11 Block 162, Singapore 760162.
             </p>
           </div>
@@ -206,7 +232,7 @@ export default function App() {
           className="w-full py-3.5 px-6 rounded-full bg-white text-black font-poppins font-bold text-xs tracking-wider uppercase flex items-center justify-center gap-2.5 shadow-[0_8px_32px_rgba(0,0,0,0.8)] border border-white/20 active:scale-95 transition-transform"
         >
           <MessageCircle className="w-4 h-4 fill-current" />
-          <span>The Suka-Suka Session ($138 / guest)</span>
+          <span>Reserve &middot; S$98 / pax</span>
         </a>
       </div>
 
