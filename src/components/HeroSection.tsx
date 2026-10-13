@@ -1,5 +1,4 @@
 import React, { useLayoutEffect, useRef } from 'react'
-import { MessageCircle, ArrowUpRight, Zap } from 'lucide-react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -12,15 +11,6 @@ export function HeroSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const cardRef = useRef<HTMLDivElement>(null)
   const overlayRef = useRef<HTMLDivElement>(null)
-
-  const whatsappBusinessUrl =
-    'https://wa.me/6589953081?text=Hi%20Ewan!%20I%20would%20like%20to%20reserve%20a%20seat%20for%20the%20eightysix%20dining%20session%20(S%2498%2Fpax).'
-
-  const handleBookClick = () => {
-    if (typeof (window as any).trackWhatsAppInquiry === 'function') {
-      (window as any).trackWhatsAppInquiry('hero_reservation_button')
-    }
-  }
 
   useLayoutEffect(() => {
     const section = sectionRef.current
@@ -108,34 +98,10 @@ export function HeroSection() {
           Private Dining
         </p>
 
-        {/* Mobile: single centered placeholder line only, per Ewan's circled-removal request */}
-        <p className="sm:hidden font-mono text-sm text-neutral-300 mt-5 tracking-wide text-center">
+        {/* Single centered placeholder line — identical on mobile and desktop */}
+        <p className="font-mono text-sm sm:text-base text-neutral-300 mt-5 tracking-wide text-center">
           A non-binary plated dessert
         </p>
-
-        {/* Desktop: full subtitle + host-access pill + WhatsApp CTA */}
-        <p className="hidden sm:block font-mono text-xs sm:text-sm text-neutral-400 mt-4 max-w-xl">
-          A non-binary dessert session. 4 seats. 1 table. Run solo by pastry chef Ewan.
-        </p>
-
-        <div className="hidden sm:inline-flex mt-4 items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.06] border border-white/15 text-[11px] font-mono text-neutral-300">
-          <Zap className="w-3.5 h-3.5 text-amber-400" />
-          <span>Direct Host Access: Ewan replies personally on WhatsApp within 15–30 mins.</span>
-        </div>
-
-        <a
-          href={whatsappBusinessUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={handleBookClick}
-          className="hidden sm:flex group mt-8 py-4 px-8 rounded-full bg-white text-black font-poppins font-bold text-sm tracking-wider uppercase items-center justify-center gap-3 hover:bg-neutral-200 transition-all shadow-[0_0_24px_rgba(255,255,255,0.2)] hover:scale-[1.01] active:scale-[0.99]"
-        >
-          <MessageCircle className="w-5 h-5 fill-current" />
-          <span>Reserve via WhatsApp &middot; S$98 / pax</span>
-          <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-        </a>
-
-        <span className="hidden sm:inline mt-3 font-mono text-[11px] text-neutral-400">WhatsApp Business: +65 8995 3081</span>
       </div>
     </section>
   )
